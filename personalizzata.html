@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esperienza Personalizzata — Sicilia in Famiglia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --terra:#C05A28; --terra-light:#E87A45; --terra-dark:#9A4420;
+  --cream:#F6F1E9; --warm:#FDFAF6; --charcoal:#2E2219;
+  --ink:#2C2420; --stone:#7A6E68; --gold:#C9963A; --line:#C8BFB0;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--warm);color:var(--ink);-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+
+nav{background:rgba(46,34,25,.98);display:flex;align-items:center;justify-content:space-between;padding:14px 48px;border-bottom:1px solid rgba(246,241,233,.1);}
+@media(max-width:640px){nav{padding:14px 20px;}}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo img{height:38px;width:auto;}
+.nav-back{font-size:.82rem;color:rgba(246,241,233,.6);font-weight:600;display:flex;align-items:center;gap:6px;transition:color .2s;}
+.nav-back:hover{color:var(--terra-light);}
+
+main{max-width:680px;margin:0 auto;padding:56px 24px 80px;}
+
+.page-eyebrow{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);font-weight:700;margin-bottom:12px;text-align:center;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:14px;text-align:center;}
+.page-title em{font-style:italic;color:var(--terra);}
+.page-sub{font-size:1rem;color:var(--stone);line-height:1.7;text-align:center;margin-bottom:40px;}
+
+.form-card{background:white;border-radius:20px;padding:36px;box-shadow:0 4px 32px rgba(46,34,25,.08);border:1px solid #E0D8CE;}
+
+/* PREZZO BOX */
+.price-box{background:var(--charcoal);border-radius:12px;padding:18px 22px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.price-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:white;line-height:1;}
+.price-label{font-size:.8rem;color:rgba(246,241,233,.5);margin-top:4px;}
+.price-items{display:flex;flex-direction:column;gap:5px;text-align:right;}
+.price-item{font-size:.8rem;color:var(--terra-light);font-weight:600;}
+
+/* FORM FIELDS */
+.form-fields{display:flex;flex-direction:column;gap:20px;}
+.field label{display:block;font-size:.82rem;font-weight:700;color:var(--ink);margin-bottom:7px;}
+.field label .opt{color:var(--stone);font-weight:400;}
+.field input,
+.field select,
+.field textarea{
+  width:100%; padding:13px 16px;
+  border:2px solid #C8BFB0;
+  border-radius:10px;
+  font-size:.95rem;font-family:'Nunito',sans-serif;color:var(--ink);
+  outline:none;background:white;
+  transition:border-color .2s, box-shadow .2s;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--terra);
+  box-shadow:0 0 0 3px rgba(192,90,40,.1);
+}
+.field textarea{resize:vertical;}
+
+/* DESTINAZIONE RADIO */
+.dest-options{display:flex;flex-direction:column;gap:10px;}
+.dest-radio{display:flex;align-items:center;gap:12px;cursor:pointer;padding:13px 16px;border:2px solid #C8BFB0;border-radius:10px;transition:border-color .2s, background .2s;}
+.dest-radio:hover{border-color:var(--terra);background:rgba(192,90,40,.03);}
+.dest-radio.active{border-color:var(--terra);background:rgba(192,90,40,.04);}
+.dest-radio input[type=radio]{accent-color:var(--terra);width:17px;height:17px;flex-shrink:0;}
+.dest-radio-label{font-size:.9rem;color:var(--ink);font-weight:600;}
+.dest-radio-sub{font-size:.78rem;color:var(--stone);margin-top:2px;}
+
+#dest-dropdown{padding-left:0;margin-top:6px;display:none;}
+
+/* PRIVACY */
+.privacy-row{display:flex;align-items:flex-start;gap:10px;cursor:pointer;}
+.privacy-row input{accent-color:var(--terra);width:17px;height:17px;margin-top:2px;flex-shrink:0;}
+.privacy-row span{font-size:.8rem;color:var(--stone);line-height:1.6;}
+.privacy-row a{color:var(--terra);text-decoration:underline;}
+
+/* CTA */
+.submit-btn{
+  width:100%;background:var(--terra);color:white;
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;
+  padding:16px;border:none;border-radius:12px;cursor:pointer;
+  transition:all .3s;margin-top:6px;
+  animation:pulse-btn 2s ease-in-out infinite;
+}
+.submit-btn:hover{background:var(--terra-dark);animation:none;transform:translateY(-2px);}
+@keyframes pulse-btn{
+  0%{box-shadow:0 4px 20px rgba(192,90,40,.4),0 0 0 0 rgba(192,90,40,.5);}
+  60%{box-shadow:0 4px 20px rgba(192,90,40,.4),0 0 0 12px rgba(192,90,40,0);}
+  100%{box-shadow:0 4px 20px rgba(192,90,40,.4),0 0 0 0 rgba(192,90,40,0);}
+}
+.submit-note{font-size:.75rem;color:var(--stone);text-align:center;margin-top:8px;}
+
+/* WA FAB */
+.wa-fab{position:fixed;bottom:28px;right:24px;z-index:9998;width:56px;height:56px;border-radius:50%;background:#25D366;color:white;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.55);text-decoration:none;}
+.wa-fab svg{width:26px;height:26px;}
+
+footer{background:var(--charcoal);border-top:1px solid rgba(246,241,233,.07);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+@media(max-width:640px){footer{padding:20px;flex-direction:column;}}
+.footer-name{font-size:.78rem;color:rgba(246,241,233,.38);}
+.footer-name strong{color:rgba(246,241,233,.6);}
+.footer-links{display:flex;gap:20px;}
+.fl{font-size:.75rem;color:rgba(246,241,233,.25);transition:color .2s;}
+.fl:hover{color:rgba(246,241,233,.6);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="logo.jpg" alt="Sicilia in Famiglia">
+  </a>
+  <a href="index.html" class="nav-back">← Torna alla home</a>
+</nav>
+
+<main>
+  <div class="page-eyebrow">Solo per te</div>
+  <h1 class="page-title">Crea la tua esperienza<br><em>su misura</em></h1>
+  <p class="page-sub">Dicci dove vuoi andare — pensiamo a tutto noi.<br>Ricevi una guida PDF personalizzata entro 48 ore.</p>
+
+  <div class="form-card">
+
+    <!-- PREZZO -->
+    <div class="price-box">
+      <div>
+        <div class="price-num">€29.90</div>
+        <div class="price-label">Esperienza PDF personalizzata</div>
+      </div>
+      <div class="price-items">
+        <div class="price-item">✓ Consegna entro 48 ore</div>
+        <div class="price-item">✓ Aggiornamenti inclusi</div>
+        <div class="price-item">✓ Personalizzata per la tua famiglia</div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-fields">
+
+      <div class="field">
+        <label>👤 Nome e cognome *</label>
+        <input id="cf-nome" type="text" placeholder="Es. Mario Rossi">
+      </div>
+
+      <div class="field">
+        <label>📧 Email di contatto *</label>
+        <input id="cf-email" type="email" placeholder="mario@email.com">
+      </div>
+
+      <div class="field">
+        <label>📱 Numero WhatsApp <span class="opt">(opzionale)</span></label>
+        <input id="cf-wa" type="tel" placeholder="+39 333 1234567">
+      </div>
+
+      <!-- DESTINAZIONE -->
+      <div class="field">
+        <label>📍 Dove vuoi andare? *</label>
+        <div class="dest-options">
+
+          <label class="dest-radio" id="dest-option-a">
+            <input type="radio" name="dest-type" value="scelta" id="dest-scelta" onchange="toggleDest(this)">
+            <div>
+              <div class="dest-radio-label">Ho una destinazione in mente</div>
+            </div>
+          </label>
+
+          <div id="dest-dropdown" class="field">
+            <select id="cf-dest">
+              <option value="">Scegli una destinazione...</option>
+              <option>📍 Altra destinazione</option>
+              <option>🌊 Isole Eolie</option>
+              <option>🌿 Zingaro e Scopello</option>
+              <option>🌋 Etna</option>
+              <option>🏛️ Valle dei Templi</option>
+              <option>🏖️ Cefalù</option>
+              <option>🏛️ Palermo</option>
+              <option>🌊 Scala dei Turchi</option>
+              <option>🏛️ Siracusa e Ortigia</option>
+              <option>🧂 Marsala e Stagnone</option>
+              <option>🏔️ Taormina</option>
+            </select>
+          </div>
+
+          <label class="dest-radio" id="dest-option-b">
+            <input type="radio" name="dest-type" value="sorpresa" id="dest-sorpresa" onchange="toggleDest(this)">
+            <div>
+              <div class="dest-radio-label">🎲 Lascia fare a noi</div>
+              <div class="dest-radio-sub">Ti sorprendiamo noi — scegliamo la meta perfetta per la tua famiglia</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <div class="field">
+        <label>👨‍👩‍👧 Composizione famiglia *</label>
+        <input id="cf-famiglia" type="text" placeholder="Es. 2 adulti + bambini di 4 e 8 anni">
+      </div>
+
+      <div class="field">
+        <label>🗓️ Periodo indicativo *</label>
+        <select id="cf-periodo">
+          <option value="">Seleziona un periodo...</option>
+          <option>Aprile – Maggio</option>
+          <option>Giugno</option>
+          <option>Luglio</option>
+          <option>Agosto</option>
+          <option>Settembre – Ottobre</option>
+          <option>Novembre – Marzo</option>
+          <option>Non ho ancora una data</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>🕐 Durata del viaggio *</label>
+        <select id="cf-durata">
+          <option value="">Seleziona la durata...</option>
+          <option>Mezza giornata</option>
+          <option>1 giorno</option>
+          <option>Weekend (2-3 giorni)</option>
+          <option>Più giorni (4+)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>💬 Note e desideri <span class="opt">(opzionale)</span></label>
+        <textarea id="cf-note" rows="3" placeholder="Cosa vorreste vivere? Avete esigenze particolari? Bambini con allergie, difficoltà motorie, preferenze..."></textarea>
+      </div>
+
+      <label class="privacy-row">
+        <input id="cf-privacy" type="checkbox">
+        <span>Ho letto e accetto la <a href="privacy.html">Privacy Policy</a>. I miei dati verranno usati solo per rispondermi. *</span>
+      </label>
+
+      <button class="submit-btn" onclick="inviaRichiesta()">
+        Invia la richiesta su WhatsApp →
+      </button>
+      <p class="submit-note">Ti risponderemo entro 24 ore per confermare la richiesta</p>
+
+    </div>
+  </div>
+</main>
+
+<a class="wa-fab" href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<footer>
+  <div class="footer-name"><strong>Sicilia in Famiglia</strong> — © 2025</div>
+  <div class="footer-links">
+    <a href="chi-siamo.html" class="fl">Chi siamo</a>
+    <a href="contatti.html" class="fl">Contatti</a>
+    <a href="privacy.html" class="fl">Privacy</a>
+    <a href="termini.html" class="fl">Termini</a>
+  </div>
+</footer>
+
+<script>
+function toggleDest(radio) {
+  const dropdown = document.getElementById('dest-dropdown');
+  const optA = document.getElementById('dest-option-a');
+  const optB = document.getElementById('dest-option-b');
+  if (radio.value === 'scelta') {
+    dropdown.style.display = 'block';
+    optA.classList.add('active');
+    optB.classList.remove('active');
+  } else {
+    dropdown.style.display = 'none';
+    optA.classList.remove('active');
+    optB.classList.add('active');
+  }
+}
+
+function inviaRichiesta() {
+  const nome     = document.getElementById('cf-nome').value.trim();
+  const email    = document.getElementById('cf-email').value.trim();
+  const wa       = document.getElementById('cf-wa').value.trim();
+  const famiglia = document.getElementById('cf-famiglia').value.trim();
+  const periodo  = document.getElementById('cf-periodo').value;
+  const durata   = document.getElementById('cf-durata').value;
+  const note     = document.getElementById('cf-note').value.trim();
+  const privacy  = document.getElementById('cf-privacy').checked;
+  const destType = document.querySelector('input[name="dest-type"]:checked');
+  const dest     = document.getElementById('cf-dest').value;
+
+  if (!nome || !email || !famiglia || !periodo || !durata || !destType) {
+    alert('Per favore compila tutti i campi obbligatori (*).');
+    return;
+  }
+  if (!privacy) {
+    alert('Devi accettare la Privacy Policy per continuare.');
+    return;
+  }
+
+  const destinazione = destType.value === 'sorpresa'
+    ? '🎲 Lascia fare a voi — vogliamo essere sorpresi!'
+    : (dest || 'Non specificata');
+
+  const msg = `Ciao! Vorrei richiedere un'esperienza personalizzata 🌟
+
+👤 Nome: ${nome}
+📧 Email: ${email}${wa ? '\n📱 WhatsApp: ' + wa : ''}
+📍 Destinazione: ${destinazione}
+👨‍👩‍👧 Famiglia: ${famiglia}
+🗓️ Periodo: ${periodo}
+🕐 Durata: ${durata}${note ? '\n💬 Note: ' + note : ''}
+
+💰 Sono interessato all'esperienza personalizzata a €29.90`;
+
+  window.open('https://wa.me/39XXXXXXXXXX?text=' + encodeURIComponent(msg), '_blank');
+}
+</script>
+
+</body>
+</html>
