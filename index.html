@@ -1321,6 +1321,30 @@ footer {
             </div>
           </div>
 
+          <div class="exp-card-h ec-has-bg" data-cat="mare storia" onclick="window.location.href='cefalu.html'" style="cursor:pointer;">
+            <div class="ec-bg" style="background-image:url('card_cefalu.jpg'); opacity:0.22;"></div>
+            <div class="ec-top">
+              <div class="exp-val-badge evb-gold">🏛️ UNESCO</div>
+              <span class="ec-tag">🏖️ Mare · Storia</span>
+              <div class="ec-title">Cefalù<br>in Famiglia</div>
+              <div class="ec-desc">La spiaggia più bella della Sicilia e un Duomo con mosaici del 1148. Una giornata perfetta dove storia e mare si incontrano davvero.</div>
+            </div>
+            <div class="ec-body">
+              <ul class="ec-features">
+                <li>Le 4 spiagge — quale scegliere con i tuoi bambini</li>
+                <li>Duomo UNESCO: prezzi, itinerari e cosa non perdere</li>
+                <li>Cristo Pantocratore 1148 — affascina anche i piccoli</li>
+                <li>La Rocca: trekking con vista mozzafiato (dai 6-7 anni)</li>
+                <li>Consigli per 0-3, 4-9 e 10-12 anni</li>
+                <li>Itinerario ora per ora + checklist cosa portare</li>
+              </ul>
+              <div class="ec-price">da <strong>€4.90</strong> <span style="font-size:.75rem;color:rgba(246,241,233,.45);font-weight:400;">PDF · Aggiornamenti inclusi</span></div>
+              <div class="ec-value-note">🌊 Spiaggia sabbiosa + 🏛️ Duomo UNESCO 2015</div>
+              <div class="ec-urgency">⭐ La meta più amata del nord Sicilia</div>
+              <a href="cefalu.html" class="ec-btn" style="display:block;text-align:center;text-decoration:none;">Scopri l'esperienza →</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1655,7 +1679,7 @@ expTabs.forEach(tab => {
     tab.classList.add('active');
     const cat = tab.dataset.cat;
     expCards.forEach(card => {
-      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+      card.style.display = (cat === 'all' || card.dataset.cat.split(' ').includes(cat)) ? '' : 'none';
     });
   });
 });
